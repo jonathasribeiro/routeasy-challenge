@@ -58,7 +58,7 @@ $ git clone https://github.com/jonathasribeiro/routeasy-challenge
 cd routeeasy-challenge
 
 # Vá à pasta backend:
-cd server
+cd backend
 
 # Instale as depêndencias:
 npm install ou yarn 
