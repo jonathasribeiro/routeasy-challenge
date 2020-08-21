@@ -55,7 +55,7 @@ Antes de qualquer coisa, você precisa ter  o [Git](https://git-scm.com) e o [No
 $ git clone https://github.com/jonathasribeiro/routeasy-challenge
 
 # Acesse à pasta do projeto:
-cd routeeasy-challenge
+cd routeasy-challenge
 
 # Vá à pasta backend:
 cd backend
