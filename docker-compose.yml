@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    ports:
+      - "3333:3333"
+    environment:
+      MONGO_URL: mongodb://mongo:27017/routeasy
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
