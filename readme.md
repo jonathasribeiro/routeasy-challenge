@@ -1,121 +1,133 @@
-<!-- banner -->
-<h1 align="center">
-  <img alt="BannerEcoleta" title="BannerEcoleta" src="./github/Tela.png">
-</h1>
+# Routeasy Challenge
 
-<!-- título -->
-<h1 align="center">
-  Challenge para desenvolvedor Full Stack
-</h1>
+> Full-stack logistics challenge — customer delivery registration with maps, geocoding, and MongoDB.
 
-<!-- descrição -->
-<h2 align="center">
-  Pagína de Cadastro de Clientes para entrega de Produtos.
-</h2>
-
-<p align="center">
-  <img src="https://img.shields.io/github/repo-size/jonathasribeiro/routeasy-challenge"/>
-  <image src="https://img.shields.io/github/last-commit/jonathasribeiro/routeasy-challenge"/>
-  <img alt="GitHub license" src="https://img.shields.io/github/license/jonathasribeiro/routeasy-challenge">
-</p>
-
-<!-- status -->
-<p align="center"><b>Status: Concluído ✅</b></p>
+[![Node.js](https://img.shields.io/badge/Node.js-18-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![React](https://img.shields.io/badge/React-16-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
+[![Logistics](https://img.shields.io/badge/Domain-Logistics-FF6600?style=flat-square)](https://github.com/jonathasribeiro/routeasy-challenge)
 
 ---
 
-<!-- index -->
-<p align="center">
-  <a href="#-sobre">Sobre</a> •
-  <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-executando-o-projeto">Executando o projeto</a> •
-  <a href="#-licença">Licença</a>
-</p>
+## Overview
 
-## 🔨 Tecnologias
+Technical challenge for **Routeasy** (logistics startup) — full-stack customer registration for product deliveries. Combines REST API, interactive maps (React Leaflet), and Google Geocoding for address validation.
 
-Estas são as principais tecnologias utilizadas na construção do projeto:
-
-- [MongoDB](https://www.mongodb.com/)
-- [Node.js](https://nodejs.org/en/)
-- [ReactJS](https://reactjs.org/)
-- [React Leaflet](https://react-leaflet.js.org/)
-- [Google Geocode Api](https://developers.google.com/maps/documentation/geolocation/overview)
+Directly relevant to senior logistics experience: **GoFlux** freight auction, **Autopass** public transit (2M+ daily users).
 
 ---
 
-## 🚀 Executando o projeto
+## Features
 
-Antes de qualquer coisa, você precisa ter  o [Git](https://git-scm.com) e o [Node.js](https://nodejs.org/en/) instalado na sua máquina. Feito isso, você pode prosseguir.
+- Customer registration form with validation (Yup)
+- **Interactive map** — React Leaflet for delivery location
+- **Geocoding** — Google Maps API for address → coordinates
+- MongoDB persistence for customer records
+- Toast notifications for feedback
+- Docker Compose for MongoDB + backend
 
-### 📂 Instalando dependências
+---
+
+## Architecture
+
+```
+┌─────────────┐     REST      ┌─────────────┐     ┌──────────┐
+│   React     │ ────────────► │   Express   │ ──► │ MongoDB  │
+│   Frontend  │               │   Backend   │     │          │
+└─────────────┘               └─────────────┘     └──────────┘
+       │                              │
+       │ React Leaflet                │ Google Geocode API
+       ▼                              ▼
+   Map UI                        Address validation
+```
+
+---
+
+## Quick Start
+
+### Docker (recommended)
 
 ```bash
-# Clone este repositório:
-$ git clone https://github.com/jonathasribeiro/routeasy-challenge
-
-# Acesse à pasta do projeto:
+git clone https://github.com/jonathasribeiro/routeasy-challenge.git
 cd routeasy-challenge
-
-# Vá à pasta backend:
-cd backend
-
-# Instale as depêndencias:
-npm install ou yarn 
-
-# Vá à pasta frontend:
-cd ../frontend
-
-# Instale as depêndencias:
-npm install ou yarn 
-
-# Volte à pasta do projeto:
-cd ..
+docker compose up --build
 ```
 
----
+Backend: http://localhost:3333
 
-### 💾 Rodando o servidor (back-end)
+### Local
 
-Antes de rodar o servidor pela primeira vez, você precisa criar o banco de dados, neste caso usei o Docker para criar um Container.
-
+**1. MongoDB**
 ```bash
-# Vá à pasta backend:
-cd backend
-
-# Crie o banco de dados:
-docker run --name <NOME DO BANCO> -p 27017:271017 -d -t mongo
-
-# Abra o Arquivo .env.example e renomeie para .env
-
-# Passe a URL do seu Banco de Dados Mongo
-
-# Execute o server em modo de desenvolvimento:
-npm run dev ou yarn dev
+docker run --name mongodb -p 27017:27017 -d mongo
 ```
 
----
-
-### 💻 Rodando a aplicação web (front-end)
-
-Com o servidor rodando, abra um novo terminal e entre na pasta do projeto.
-
+**2. Backend**
 ```bash
-# Vá à pasta frontend:
+cd backend
+cp .env.example .env
+npm install
+npm run dev
+```
+
+**3. Frontend**
+```bash
 cd frontend
-
-# Execute o site em modo de desenvolvimento:
-npm run start ou yarn dev
+npm install
+npm start
 ```
-Caso a página não abrir automaticamente, acesse: http://localhost:3000
 
 ---
 
+## Environment
 
-## 📋 Licença
+**Backend** (`backend/.env`)
 
-Esse repositório está sobe a licença [MIT](https://github.com/jonathasribeiro/routeasy-challenge/blob/master/LICENSE.md).
-
-Desenvolvido por Jonathas Ribeiro 🚀 [Entre em contato!](https://www.linkedin.com/in/jonathasribeiro151)
+| Variable | Description |
+|----------|-------------|
+| `MONGO_URL` | MongoDB connection string |
 
 ---
+
+## Project Structure
+
+```
+├── backend/
+│   ├── src/
+│   │   ├── app/controllers/
+│   │   ├── app/models/
+│   │   └── routes.js
+│   ├── .env.example
+│   └── Dockerfile
+├── frontend/
+│   └── src/
+│       ├── pages/Main/
+│       └── components/
+└── docker-compose.yml
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | Node.js, Express, Mongoose |
+| Frontend | React, React Router, Styled Components |
+| Maps | React Leaflet |
+| Validation | Yup |
+| Database | MongoDB |
+
+---
+
+## Author
+
+**Jonathas Ribeiro** — Senior Fullstack Engineer (GoFlux · Autopass)  
+[LinkedIn](https://www.linkedin.com/in/jonathasribeiroreal)
+
+---
+
+## License
+
+MIT
